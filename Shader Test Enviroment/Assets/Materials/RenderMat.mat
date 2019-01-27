@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 10305, guid: 0000000000000000f000000000000000, type: 0}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -54,13 +54,21 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _RevealTexture:
+        m_Texture: {fileID: 2800000, guid: 6b5aabb9b2a9ba044b86947140cf69bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TransParent:
+        m_Texture: {fileID: 2800000, guid: 6b5aabb9b2a9ba044b86947140cf69bb, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _VisibleTexture:
         m_Texture: {fileID: 10912, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - _BumpScale: 1
-    - _CircleRadius: 3.5
+    - _CircleRadius: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
@@ -74,14 +82,15 @@ Material:
     - _PulseFloat: 0
     - _RingSize: 0
     - _SmoothnessTextureChannel: 0
+    - _SoundWave: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _CharacterPos: {r: 0, g: 0, b: 0, a: 0}
-    - _CharacterPosition: {r: -3.7477133, g: -1.5476953, b: -0.9744146, a: 0}
+    - _CharacterPos: {r: 5.4, g: -1.5476953, b: -4.45, a: 0}
+    - _CharacterPosition: {r: 4.69, g: -1.5476953, b: -3.79, a: 0}
     - _Color: {r: 0.33490568, g: 1, b: 0.8751594, a: 1}
-    - _ColorTint: {r: 0.6603774, g: 0.6603774, b: 0.6603774, a: 0}
+    - _ColorTint: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _TransParent: {r: 0, g: 0, b: 0, a: 0}
+    - _TransParent: {r: 1, g: 1, b: 1, a: 0}

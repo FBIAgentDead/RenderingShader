@@ -2,13 +2,9 @@
 {
 	Properties
 	{
-		_MainTex ("Texture", 2D) = "white" {}
-		_CharacterPosition("char pos", vector) = (0,0,0,0)
-		_CircleRadius("SpotlightRadius", Range(0,20)) = 3
-		_RingSize("Ring size", Range(0,5)) = 1
-		_ColorTint("Outside Border", Color) = (0,0,0,0)
-		_TransParent("Transparent", Color) = (0,0,0,1)
-		_PulseFloat("The sound pulse", float) = 0
+		_MainTex ("Main Texture but is not used", 2D) = "white" {}
+		_ColorTint("The Object color when no vision", Color) = (0,0,0,0)
+		_RevealTexture("The Pulse texture that is shown", 2D) = "white"
 	}
 	SubShader
 	{
@@ -38,13 +34,17 @@
 
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
-			
-			float4 _CharacterPosition;
-			float _CircleRadius;
-			float _RingSize;
+
+			float _SoundWave[100];
+			float _RingSize[100];
 			float4 _ColorTint;
-			float4 _TransParent;
-			float _PulseFloat;
+			sampler2D _RevealTexture;
+			float4 _RevealTexture_ST; 
+			vector _ObjectPositions[100];
+			int _ArrayLenght;
+			float _MaxDistance[100];
+
+			float temp;
 			
 			v2f vert (appdata v)
 			{
@@ -59,19 +59,18 @@
 			
 			fixed4 frag (v2f i) : SV_Target
 			{
-				// sample the texture
-				fixed4 col = (0,0,0,0);
 
-				float dist = distance(i.worldPos, _CharacterPosition.xyz);
+				fixed4 col = _ColorTint;
 
-				if(dist < _CircleRadius){
-					col = _TransParent;
-				}
-				else if(dist > _CircleRadius && dist < _CircleRadius + _RingSize){
-					float blendStrenght = dist - _CircleRadius;
-					col = lerp(_TransParent, _ColorTint, 0.5);
-				}else{
-					clip(-1);
+				for(int j = 0; j < _ArrayLenght; j++){
+					float dist = distance(i.worldPos, _ObjectPositions[j].xyz);
+					if(dist > _SoundWave[j] && dist < _SoundWave[j] + _RingSize[j]){
+						col = tex2D(_RevealTexture, i.uv);
+					}
+					else if(dist < _SoundWave[j] && dist > _SoundWave[j]-(_RingSize[j]*8) ){
+						float t = 1/(_SoundWave[j]/(_RingSize[j]*8)) * (dist - (_SoundWave[j]-(_RingSize[j]*4))); 
+						col = lerp(_ColorTint, tex2D(_RevealTexture, i.uv), t);
+					}
 				}
 				return col;
 			}
